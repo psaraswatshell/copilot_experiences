@@ -5,14 +5,12 @@ func distinctsubstringcount(s string) int {
 	if len(s) == 1 {
 		return 1
 	}
-	count := 0
+	set := make(map[string]struct{})
+
 	for i := 0; i < len(s); i++ {
 		for j := i + 1; j < len(s); j++ {
-			if s[i] == s[j] {
-				continue
-			}
-			count++
+			set[s[i:j]] = struct{}{}
 		}
 	}
-	return count
+	return len(set)+1 //+1 for the whole string
 }
