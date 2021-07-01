@@ -1,16 +1,17 @@
-func distinctSubstringofString(s string, t string) int {
-	var count int
-	var m map[string]bool
+func distinctsubstringcount(s string) int {
+	if len(s) == 0 {
+		return 0
+	}
+	if len(s) == 1 {
+		return 1
+	}
+	count := 0
 	for i := 0; i < len(s); i++ {
-		m = make(map[string]bool)
-		for j := i; j < len(s); j++ {
-			if m[s[j:j+1]] {
+		for j := i + 1; j < len(s); j++ {
+			if s[i] == s[j] {
 				continue
 			}
-			if strings.Contains(t, s[j:j+1]) {
-				count++
-			}
-			m[s[j:j+1]] = true
+			count++
 		}
 	}
 	return count
