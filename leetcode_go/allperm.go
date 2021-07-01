@@ -1,19 +1,16 @@
-func permute(nums []int) [][]int {
-    var res [][]int
-    dfs(&res, nums, 0)
-    return res
-}
-
-func dfs(res *[][]int, nums []int, start int){
-    if start >= len(nums){
-        t := make([]int, len(nums))  //be careful of these two lines
-        copy(t, nums)
-        *res = append(*res, t)
-        return
+func distinctsubstringscount(s string) int {
+    if s == "" {
+        return 0
     }
-    for i := start; i < len(nums); i++{
-        nums[start], nums[i] = nums[i], nums[start]
-        dfs(res, nums, start+1)
-       nums[start], nums[i] = nums[i], nums[start]
+    n := len(s)
+    dp := make([]int, n+1)
+    dp[0] = 1
+    for i := 1; i <= n; i++ {
+        for j := i - 1; j >= 0; j-- {
+            if s[j] != s[i-1] {
+                dp[i] += dp[j]
+            }
+        }
     }
+    return dp[n]
 }
